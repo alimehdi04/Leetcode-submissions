@@ -4,33 +4,47 @@ class Solution
     {
         int m = matrix.length;
         int n = matrix[0].length;
-        ArrayList<Integer> rlist = new ArrayList<Integer>();
-        ArrayList<Integer> clist = new ArrayList<Integer>();
-        
+        int colzero = Integer.MIN_VALUE;
         //marking
-        for(int i = 0; i < m; i++)
+        for(int i =0; i <m; i++)
         {
-            for(int j=0; j < n; j++)
+            for(int j =0; j <n; j++)
             {
-                if(matrix[i][j]==0)
+                if(matrix[i][j]==0&&j!=0)
                 {
-                    rlist.add(i);
-                    clist.add(j);
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+                else if(matrix[i][j]==0&&j==0)
+                {
+                    matrix[i][0] = 0;
+                    colzero = 0;
                 }
             }
         }
         //setting
-        for(Integer i : rlist)
+        for(int i=1; i <m; i++)
         {
-            for(int j=0; j < n; j++)
-                matrix[i][j] = 0;
+            for(int j=1; j <n; j++)
+            {
+                if(matrix[i][j]!=0)
+                {
+                    if(matrix[i][0]==0||matrix[0][j]==0)
+                        matrix[i][j]=0;
+                }
+            }
         }
-        for(Integer i : clist)
+        //finally setting 0th row then column
+        if(matrix[0][0]==0)
         {
-            for(int j=0; j < m; j++)
-                matrix[j][i] = 0;
+            for(int j=1;j<n;j++)
+                matrix[0][j]=0;
         }
-        
+        if(colzero == 0)
+        {
+            for(int i=0; i<m; i++)
+                    matrix[i][0]=0;
+        }
     }
 }
 // ArrayList<Integer> list = new ArrayList<Integer>();
