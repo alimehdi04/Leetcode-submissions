@@ -8,20 +8,33 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+import java.util.*;
 class Solution 
 {
     public ListNode reverseList(ListNode head) 
     {
-         ListNode prev = null;  
-        ListNode current = head;
-    
-        
-        while(current != null) { 
-            ListNode next = current.next; 
-            current.next = prev;
-            prev = current;
-            current = next;
+        Stack<Integer> st = new Stack<>();
+        ListNode newnode = new ListNode();
+        ListNode curr = head;
+        while(curr!=null)
+        {
+            st.push(curr.val);
+            curr = curr.next;
         }
-       return prev; 
+        ListNode temp = newnode;
+        while(!st.isEmpty())
+        {
+            if(newnode==null)
+            {
+                newnode.val = st.pop();
+            }
+            else
+            {
+                ListNode xyz = new ListNode(st.pop());
+                temp.next = xyz;
+                temp = temp.next;
+            }
+        }
+        return newnode.next;
     }
 }
