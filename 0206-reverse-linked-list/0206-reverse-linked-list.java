@@ -13,28 +13,39 @@ class Solution
 {
     public ListNode reverseList(ListNode head) 
     {
-        Stack<Integer> st = new Stack<>();
-        ListNode newnode = new ListNode();
+        ListNode prev = null;
         ListNode curr = head;
+        ListNode front = curr;
         while(curr!=null)
         {
-            st.push(curr.val);
-            curr = curr.next;
+            front = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = front;
         }
-        ListNode temp = newnode;
-        while(!st.isEmpty())
-        {
-            if(newnode==null)
-            {
-                newnode.val = st.pop();
-            }
-            else
-            {
-                ListNode xyz = new ListNode(st.pop());
-                temp.next = xyz;
-                temp = temp.next;
-            }
-        }
-        return newnode.next;
+        return prev;
+        // Stack<Integer> st = new Stack<>();
+        // ListNode newnode = new ListNode();
+        // ListNode curr = head;
+        // while(curr!=null)
+        // {
+        //     st.push(curr.val);
+        //     curr = curr.next;
+        // }
+        // ListNode temp = newnode;
+        // while(!st.isEmpty())
+        // {
+        //     if(newnode==null)
+        //     {
+        //         newnode.val = st.pop();
+        //     }
+        //     else
+        //     {
+        //         ListNode xyz = new ListNode(st.pop());
+        //         temp.next = xyz;
+        //         temp = temp.next;
+        //     }
+        // }
+        // return newnode.next;
     }
 }
