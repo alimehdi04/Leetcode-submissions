@@ -8,31 +8,47 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-import java.util.*;
-class Solution {
-    public boolean isPalindrome(ListNode head) {
-        Stack<Integer> str = new Stack<Integer>();
-        ListNode newhead = head;
-        while(newhead!=null)
-        {
-            str.add(newhead.val);
-            newhead = newhead.next;
+class Solution 
+{
+    public boolean isPalindrome(ListNode head) 
+    {
+         if (head == null || head.next == null) {
+            // It's a palindrome by definition
+            return true;
         }
-        System.out.println(str);
-        newhead = head;
-        while(!str.isEmpty())
+        if(head.next.next==null)
+            return head.val == head.next.val;
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next!=null&&fast.next.next!=null)
         {
-            
-            // Integer s = str.pop();
-            // int r = s.intValue();
-            // Integer con = new Integer(newhead.val);
-            
-            if(str.pop() != newhead.val)
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode check = reverse(slow.next);
+        ListNode i = check;
+        ListNode j = head;
+        while(j!=null&&i!=null)
+        {
+            if(j.val!=i.val)
+            {
+                reverse(check);
                 return false;
-            
-            newhead = newhead.next;
-            // str.pop();
+            }
+            j = j.next;
+            i = i.next;
         }
+        reverse(check);
         return true;
+    }
+    public ListNode reverse(ListNode head)
+    {
+        if(head==null||head.next==null)
+            return head;
+        ListNode newhead = reverse(head.next);
+        ListNode front = head.next;
+        front.next = head;
+        head.next = null;
+        return newhead;
     }
 }
