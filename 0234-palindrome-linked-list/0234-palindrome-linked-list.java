@@ -12,12 +12,6 @@ class Solution
 {
     public boolean isPalindrome(ListNode head) 
     {
-         if (head == null || head.next == null) {
-            // It's a palindrome by definition
-            return true;
-        }
-        if(head.next.next==null)
-            return head.val == head.next.val;
         ListNode slow = head;
         ListNode fast = head;
         while(fast.next!=null&&fast.next.next!=null)
@@ -25,20 +19,15 @@ class Solution
             fast = fast.next.next;
             slow = slow.next;
         }
-        ListNode check = reverse(slow.next);
-        ListNode i = check;
-        ListNode j = head;
-        while(j!=null&&i!=null)
+        ListNode first = head;
+        ListNode second = reverse(slow.next);
+        while(second!=null)
         {
-            if(j.val!=i.val)
-            {
-                reverse(check);
+            if(second.val!=first.val)
                 return false;
-            }
-            j = j.next;
-            i = i.next;
+            first = first.next;
+            second = second.next;
         }
-        reverse(check);
         return true;
     }
     public ListNode reverse(ListNode head)
