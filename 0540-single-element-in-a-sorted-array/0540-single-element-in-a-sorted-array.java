@@ -1,27 +1,29 @@
-class Solution 
-{
-    public int singleNonDuplicate(int[] nums) 
+class Solution {
+    public int singleNonDuplicate(int[] a) 
     {
-        int low=0, high= nums.length-1;
+        int low =0;
+        int high = a.length-1;
         while(low<high)
         {
-            int mid = low + (high-low)/2;
-            if(mid%2==0)
+            int mid = low+(high-low)/2;
+            if(mid%2==0)//even
             {
-                if(nums[mid]==nums[mid+1])
-                    low=mid+2;
+                if(a[mid+1]==a[mid])
+                {
+                    low = mid+2;
+                }
                 else
-                    high=mid-1;
+                    high = mid;
             }
-            else
+            else//odd
             {
-                if(nums[mid]==nums[mid-1])
-                    low=mid+1;
+                if(a[mid-1]==a[mid])
+                    low = mid+1;
                 else
-                    high=mid-1;
+                    high = mid-1;
             }
+                
         }
-        return nums[low];
+        return a[low];
     }
-    
 }
