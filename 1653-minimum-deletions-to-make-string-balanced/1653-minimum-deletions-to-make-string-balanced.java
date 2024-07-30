@@ -1,7 +1,7 @@
 class Solution {
     public int minimumDeletions(String s) {
         int n = s.length();
-        int lbc[] = new int[n];
+        //int lbc[] = new int[n];
         int rac[] = new int[n];
         int min = Integer.MAX_VALUE;
         int tb = 0;
@@ -20,12 +20,13 @@ class Solution {
         }
         for(int i = 0; i < n; i++)
         {
-            lbc[i] = tb;
+            //lbc[i] = tb;
+            if(min>(rac[i]+tb))
+                min = (rac[i]+tb);
             if(s.charAt(i)=='b')
                 tb++;
             
-            if(min>(rac[i]+lbc[i]))
-                min = (rac[i]+lbc[i]);
+            
         }
         return min;
     }
