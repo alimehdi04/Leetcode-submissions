@@ -14,35 +14,18 @@ class Solution
     {
         if(head == null || head.next == null || head.next.next == null)
             return head;
-        Stack<Integer> odd = new Stack<>();
-        Stack<Integer> even = new Stack<>();
-        
-        ListNode i = head;
-        int j = 0;
-        while(i!=null)
-        {
-            if(j%2==0)
-                odd.push(i.val);
-            else
-                even.push(i.val);
-            
-            j++;
-            i = i.next;
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
+
+        while (even != null && even.next != null) {
+            odd.next = even.next;
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
         }
-        
-        ListNode newhead = new ListNode((int)even.pop());
-        while(!even.isEmpty())
-        {
-            ListNode node = new ListNode((int)even.pop());
-            node.next = newhead;
-            newhead = node;
-        }
-        while(!odd.isEmpty())
-        {
-            ListNode node = new ListNode((int)odd.pop());
-            node.next = newhead;
-            newhead = node;
-        }
-        return newhead;
+
+        odd.next = evenHead;
+        return head;
     }
 }
