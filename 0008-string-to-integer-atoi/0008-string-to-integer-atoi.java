@@ -1,43 +1,51 @@
 class Solution 
 {
+    private int index;
+    private int sign;
+    private long result;
+    private boolean numStarted;
     public int myAtoi(String s) 
     {
-        int polarity = 1;
-        int n = s.length();
-        long result = 0; // Use long to handle overflow during calculation
-        int sp = 0; //supervision
-        
-        for (char c : s.toCharArray()) 
+        index = 0;
+        sign = 1;
+        result = 0;
+        numStarted = false;
+        return recursiveAtoi(s);
+    }
+    public int recursiveAtoi(String s)
+    {
+        if(index >= s.length())
         {
-            if (Character.isWhitespace(c) && sp == 0) 
-            {
-                continue;
-            } 
-            else if (c == '-' && sp == 0) 
-            {
-                polarity = -1;
-                sp++;
-            } 
-            else if (c == '+' && sp == 0) 
-            {
-                sp++;
-            } 
-            else if (Character.isDigit(c)) 
-            {
-                result = result * 10 + (c - '0');
-                sp++;
-                // Check for overflow
-                if (result > Integer.MAX_VALUE) 
-                {
-                    return polarity == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
-                }
-            } 
-            else 
-            {
-                break;
-            }
+            return (int)(sign*result);
         }
-
-        return (int) result * polarity;        
+        char c = s.charAt(index);
+        
+        if(Character.isWhitespace(c)&&!numStarted)
+        {
+            index++;
+            return recursiveAtoi(s);
+        }
+        
+        if((c=='+'||c=='-')&&!numStarted)
+        {
+            sign = (c=='+')?1:-1;
+            index++;
+            numStarted = true;
+            return recursiveAtoi(s);
+        }
+        
+        if(Character.isDigit(c))
+        {
+            numStarted = true;
+            result = result*10 + (c-'0');
+            
+            if(result>Integer.MAX_VALUE)
+            {
+                return (sign==1)?Integer.MAX_VALUE:Integer.MIN_VALUE;
+            }
+            index++;
+            return recursiveAtoi(s);
+        }
+        return (int)(sign*result);
     }
 }
