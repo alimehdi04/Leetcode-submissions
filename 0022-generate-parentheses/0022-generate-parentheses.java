@@ -8,7 +8,7 @@ class Solution
     }
     public void backtrack(int open, int closed, int n, List<String> ans, String s)
     {
-        if(open==closed&&open==n)
+        if(open==n&&closed==n)
         {
             ans.add(s);
             return;
