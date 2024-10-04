@@ -7,13 +7,15 @@ class Solution
         int target = skill[0] + skill[n - 1];
         long chemistry = 0;
         
-        for (int i = 0; i < n / 2; i++) {
-            if (skill[i] + skill[n - 1 - i] != target) {
+        for(int i = 0; i < n/2; i++)
+        {
+            if((skill[i]+skill[n-i-1])!=target)
                 return -1;
-            }
-            chemistry += (long) skill[i] * skill[n - 1 - i];
+            chemistry += (skill[i]*skill[n-1-i]);
         }
+        return chemistry;
         
-        return chemistry;        
+        //1,2,3,3,4,5
+        // t = 6
     }
 }
