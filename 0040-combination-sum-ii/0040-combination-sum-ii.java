@@ -2,34 +2,27 @@ class Solution
 {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) 
     {
-       List<List<Integer>> list = new LinkedList<List<Integer>>();
-        
-       Arrays.sort(candidates);
-        //Sorry but had to test something cool
-       /*      */backtrack(/*             */list, new ArrayList<Integer>(), candidates, /* */target,/* */ 0);
-        
-       return list;
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(candidates);
+        backtrack(candidates, target, 0, ans, new ArrayList<>());
+        return ans;
     }
-
-    private void backtrack(List<List<Integer>> list, List<Integer> tempList, int[] cand, int remain, int start) 
+    public void backtrack(int[] arr, int rem, int start, List<List<Integer>> ans, List<Integer> sub)
     {
-       if(remain < 0) 
-           return; /* no solution */
+        if(rem < 0) return;
         
-       else if(remain == 0) 
-           list.add(new ArrayList<>(tempList));
-        
-       else
-       {
-          for (int i = start; i < cand.length; i++) 
-          {
-             if(i > start && cand[i] == cand[i-1]) 
-                 continue; /* skip duplicates */
-              
-             tempList.add(cand[i]);
-             backtrack(list, tempList, cand, remain - cand[i], i+1);
-             tempList.remove(tempList.size() - 1);
-          }
-       }
+        else if(rem == 0)
+            ans.add(new ArrayList<>(sub));
+        else
+        {
+            for(int i = start; i < arr.length && arr[i] <= rem; i++)
+            {
+                if(i > start && arr[i] == arr[i-1]) continue;
+                
+                sub.add(arr[i]);
+                backtrack(arr, rem-arr[i], i+1, ans, sub);
+                sub.remove(sub.size() - 1);
+            }
+        }
     }
 }
