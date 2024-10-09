@@ -1,31 +1,39 @@
 class Solution {
-    public String decodeString(String s) {
+    public String decodeString(String s) 
+    {
+        
         Stack<Integer> countStack = new Stack<>();
-        Stack<String> stringStack = new Stack<>();
-        String currentString = "";
+        Stack<String> alphabets = new Stack<>();
+        String currS = "";
         int count = 0;
         
-        for (char ch : s.toCharArray()) {
-            if (Character.isDigit(ch)) {
+        for (char ch : s.toCharArray()) 
+        {
+            
+            if (Character.isDigit(ch)) 
                 count = count * 10 + (ch - '0');
-            } else if (ch == '[') {
+            
+            else if (ch == '[') 
+            {
                 countStack.push(count);
-                stringStack.push(currentString);
-                currentString = "";
+                alphabets.push(currS);
+                currS = "";
                 count = 0;
-            } else if (ch == ']') {
-                String decodedString = stringStack.pop();
+            } 
+            else if (ch == ']') 
+            {
+                String headS = alphabets.pop();
                 int repeatTimes = countStack.pop();
-                String repeated = "";
-                for (int i = 0; i < repeatTimes; i++) {
-                    repeated += currentString;
-                }
-                currentString = decodedString + repeated;
-            } else {
-                currentString += ch;
-            }
+                String temp = "";
+                
+                for (int i = 0; i < repeatTimes; i++) 
+                    temp += currS;
+                
+                currS = headS + temp;
+            } 
+            else
+                currS += ch;
         }
-        
-        return currentString;
+        return currS;
     }
 }
