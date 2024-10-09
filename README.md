@@ -39,6 +39,6 @@ These solutions are my own work and are meant for learning purposes. If you're a
 
 ## Connect with Me
 
-If you'd like to connect or discuss anything related to DSA or software engineering, feel free to reach out to me on [GitHub](https://github.com/YourGitHubUsername) or [LeetCode](https://leetcode.com/alimehdi27/).
+If you'd like to connect or discuss anything related to DSA or software engineering, feel free to reach out to me on [GitHub](https://github.com/alimehdi04) or [LeetCode](https://leetcode.com/alimehdi27/).
 
 Happy Coding!
